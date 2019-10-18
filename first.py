@@ -32,13 +32,16 @@ def smsTimer(p, w, text=''):
     textLenght = len(text)
     for i in range(textLenght):
         tempIndex = findingKey(text[i])
-        if tempIndex != 1 and tempIndex == lastIndex:
+        print('This index is ' + str(tempIndex) +
+              ' Last Index was ' + str(lastIndex))
+        if tempIndex == lastIndex:
             time += w
+            print('TIming w: ', time)
         lastIndex = tempIndex
         time += p
-        # Uncomment For Index Checking
-        # print('This index is ' + str(tempIndex) +
-        #       ' Last Index was ' + str(lastIndex))
+        print('TIming p: ', time)
+
+        
 
     return time
 
@@ -47,9 +50,14 @@ testNumber = int(input('Enter Number Of Test Cases: '))
 
 
 for i in range(testNumber):
-    p.append(int(input('Enter p ')))
-    w.append(int(input('Enter w ')))
-    text.append(input('Enter text ').upper())
+    d = input('Enter p and w: ')
+    d = d.split()
+    print(d)
+    p.append(int(d[0]))
+    w.append(int(d[1]))
+    print(p)
+    print(w)
+    text.append(input('Enter text: ').upper())
 
 for i in range(testNumber):
     print(smsTimer(p[i], w[i], text[i]))
