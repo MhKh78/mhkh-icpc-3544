@@ -13,13 +13,14 @@ keypad = {
 
 def findingKey(c):
     if c == '':
-        return 0
+        return [0, 0]
     for key in keypad.keys():
         if c in keypad[key]:
-            return key
+            tab = keypad[key].index(c) + 1
+            return [key, tab]
 
 
-character = input('Enter Character: ')
+character = input('Enter Character: ').upper()
 res = findingKey(character)
 
 print(res)

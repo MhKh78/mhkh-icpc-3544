@@ -16,27 +16,30 @@ keypad = {
 
 def findingKey(c):
     if c == '':
-        return 0
+        return [0, 0]
     for key in keypad.keys():
         if c in keypad[key]:
-            return key
+            tap = keypad[key].index(c) + 1
+            return [key, tap]
 
 
 def smsTimer(p, w, text=''):
     time = 0
+    temp = 0
     lastIndex = ''
-    tempIndex = ''
+    tempIndex = None
+    tapSize = 0
     if text == '':
         return time
 
-    textLenght = len(text)
-    for i in range(textLenght):
-        tempIndex = findingKey(text[i])
+    for i in range(len(text)):
+        temp = findingKey(text[i])
+        tempIndex = temp[0]
+        tapSize = temp[1]
         if tempIndex != 1 and tempIndex == lastIndex:
             time += w
         lastIndex = tempIndex
-        time += p
-
+        time += (tapSize * p)
     return time
 
 
@@ -44,8 +47,9 @@ testNumber = int(input())
 
 
 for i in range(testNumber):
-    p.append(int(input()))
-    w.append(int(input()))
+    pAndW = (input()).split()
+    p.append(int(pAndW[0]))
+    w.append(int(pAndW[1]))
     text.append(input().upper())
 
 for i in range(testNumber):
